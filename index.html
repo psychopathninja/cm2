@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Permission Example</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="openCameraButton">Open Camera</button>
+
+    <script>
+        const openCameraButton = document.getElementById('openCameraButton');
+
+        openCameraButton.addEventListener('click', async () => {
+            try {
+                // Request camera access
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+                // If access is granted, display the video stream (optional)
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                video.autoplay = true;
+                document.body.appendChild(video);
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        });
+    </script>
+</body>
+</html>
